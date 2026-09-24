@@ -8,7 +8,7 @@
 
 项目页面及后台接口已部署到 [Cloudflare 站点](https://what-to-eat-today.liu1214550793.workers.dev/)。目前 `AMAP_ENABLED=false`，随机餐食和 PWA 可用，定位、地点搜索和附近查店暂未开放，也未向 Cloudflare 上传高德凭据。不能将当前状态视为完整地图功能已上线。
 
-2026-09-24：Cloudflare 最小测试页已由用户确认手机可打开；正式页面的手机访问与抽取仍待用户验收。开发电脑访问 workers.dev 存在 TLS 握手问题，部署成功及本地测试不能替代真机验收。
+2026-09-24：用户已确认正式页面在手机上能打开并正常随机抽取。此反馈仅覆盖当前手机环境下的页面访问与抽取，不代表所有网络可用，也不包含尚未开启的地图功能。开发电脑访问 workers.dev 仍存在 TLS 握手问题。
 
 完整功能需要静态资源和后台接口。本仓库提供 Node.js 和 Cloudflare Workers 两种后台部署方式；Workers 可同时托管页面和接口，无需自购服务器。地图功能仍需配置高德凭据及域名白名单。GitHub Pages 只能承载静态部分。Cloudflare 的操作与费用开关见 [部署说明](cloudflare/README.md)。
 
