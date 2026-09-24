@@ -16,7 +16,8 @@ export async function fetchAmap(path, params, { fetchImpl = fetch, signal, timeo
   try {
     const url = new URL(path, 'https://restapi.amap.com');
     url.search = new URLSearchParams(params).toString();
-    const response = await fetchImpl(url, { signal: combined, redirect: 'error', headers: { Accept: 'application/json' } });
+    // Workers 不支持 redirect:error；manual 不跟随跳转，下面将 3xx 作为上游错误拒绝。
+    const response = await fetchImpl(url, { signal: combined, redirect: 'manual', headers: { Accept: 'application/json' } });
     if (response.status === 429) throw new ApiError('QUOTA', 429);
     if (!response.ok) throw new ApiError('UPSTREAM');
     if (Number(response.headers.get('content-length')) > 1048576) throw new ApiError('INVALID_RESPONSE');

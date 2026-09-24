@@ -33,7 +33,7 @@ test('配置仅返回公开 JS Key；无配置仍正常提供界面', async t =>
 });
 test('真实 HTTP 代理发向固定主机，裁剪响应字段，服务器 Key 不返回', async t => {
   let called;
-  const base = await server(t, { fetchImpl: async (url, options) => { called = url; assert.equal(options.redirect, 'error'); return Response.json({ status: '1', pois: [{ id: 'a', name: '测试', location: '116.4,39.9', typecode: '050100', extra: config.webKey, business: { rating: [] } }] }); } });
+  const base = await server(t, { fetchImpl: async (url, options) => { called = url; assert.equal(options.redirect, 'manual'); return Response.json({ status: '1', pois: [{ id: 'a', name: '测试', location: '116.4,39.9', typecode: '050100', extra: config.webKey, business: { rating: [] } }] }); } });
   const response = await fetch(base + '/api/nearby?' + params()), body = await response.json();
   assert.equal(called.origin, 'https://restapi.amap.com'); assert.equal(called.searchParams.get('key'), config.webKey);
   assert.equal(body.matchLevel, 'specific'); assert.equal(body.pois[0].business.rating, ''); assert.ok(!JSON.stringify(body).includes(config.webKey));

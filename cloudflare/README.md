@@ -21,7 +21,9 @@ npm run deploy:cloudflare
 
 ## 地图开关与凭据
 
-`wrangler.jsonc` 的 `AMAP_ENABLED` 默认是字符串 `"false"`。此时随机餐食和 PWA 可用，地图接口返回 `AMAP_DISABLED`，不加载高德脚本，也不向高德发送请求。完整查店实现保留在代码中，但不能把这种状态称为地图功能已上线。
+本站已获所有者授权，将 `wrangler.jsonc` 的 `AMAP_ENABLED` 设置为字符串 `"true"` 并配置 Cloudflare Secret。公开地图调用会消耗所有者的高德额度。复制本仓库建立自己的站点时，应先改为 `"false"`，完成费用及权限核实后再启用。
+
+设置为 `"false"` 时随机餐食和 PWA 仍可用，地图接口返回 `AMAP_DISABLED`，不加载高德脚本，也不向高德发送请求。需要停用地图时，将该值改回 `"false"` 并重新部署。
 
 只有确认高德账户接口权限、剩余额度及可接受费用后，才执行以下步骤：
 

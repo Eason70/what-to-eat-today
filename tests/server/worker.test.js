@@ -52,7 +52,7 @@ test('Worker 限流拒绝及绑定缺失均不放行上游；使用可信 CF 客
 test('Worker 附近查询保留检索规则并裁剪上游响应', async () => {
   let called;
   const response = await handleRequest(request('/api/nearby?foodId=chongqing-noodles&step=0&lng=116.4&lat=39.9&radius=1000'), environment(), {
-    fetchImpl: async (url, options) => { called = url; assert.equal(options.redirect, 'error'); return Response.json({ status: '1', pois: [{ id: '1', name: '店', location: '116.4,39.9', extra: secrets.AMAP_WEB_SERVICE_KEY }] }); },
+    fetchImpl: async (url, options) => { called = url; assert.equal(options.redirect, 'manual'); return Response.json({ status: '1', pois: [{ id: '1', name: '店', location: '116.4,39.9', extra: secrets.AMAP_WEB_SERVICE_KEY }] }); },
   });
   assert.equal(called.origin, 'https://restapi.amap.com'); assert.equal(called.searchParams.get('key'), secrets.AMAP_WEB_SERVICE_KEY);
   assert.equal(called.searchParams.get('keywords'), '重庆小面');
@@ -72,6 +72,20 @@ test('Worker 位置搜索、逆编码和 SDK 坐标转换返回兼容数据', as
 test('Worker 不把上游错误细节和密钥返回给用户', async () => {
   const response = await handleRequest(request('/api/places?q=a'), environment(), { fetchImpl: async () => { throw new Error(secrets.AMAP_WEB_SERVICE_KEY); } });
   assert.deepEqual(await response.json(), { error: { code: 'NETWORK' } });
+});
+
+test('Worker 不跟随上游重定向，避免将凭据请求发送到其他地址', async () => {
+  let calls = 0;
+  const response = await handleRequest(request('/api/places?q=北京'), environment(), {
+    fetchImpl: async (_url, options) => {
+      calls++;
+      assert.equal(options.redirect, 'manual');
+      return new Response(null, { status: 302, headers: { Location: 'https://example.invalid/' } });
+    },
+  });
+  assert.equal(calls, 1);
+  assert.equal(response.status, 502);
+  assert.deepEqual(await response.json(), { error: { code: 'UPSTREAM' } });
 });
 
 test('Worker 静态资源通过绑定处理，不使用本地文件系统', async () => {
