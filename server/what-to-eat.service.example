@@ -1,0 +1,20 @@
+[Unit]
+Description=What to eat today
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=whattoeat
+WorkingDirectory=/opt/what-to-eat
+EnvironmentFile=/opt/what-to-eat/.env
+ExecStart=/usr/bin/node server/index.js --production
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

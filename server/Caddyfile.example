@@ -1,0 +1,8 @@
+# 替换域名，与服务器环境 PUBLIC_ORIGIN 保持一致。
+eat.example.com {
+    encode zstd gzip
+    reverse_proxy 127.0.0.1:4173 {
+        header_up X-Forwarded-For {remote_host}
+    }
+    # 不启用访问日志，避免把查询坐标写入磁盘。
+}

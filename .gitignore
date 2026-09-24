@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+test-results/
+playwright-report/
+*.log
+.sites-runtime/
+.netlify/
+.openai/
+# 独立简化版及临时托管产物不属于完整版源码仓库。
+public-site/
+exports/

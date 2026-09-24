@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#24594b">
+  <meta name="description" content="随机一个具体餐食，再按你选择的距离查找附近相关餐馆。">
+  <title>今天吃什么</title>
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="stylesheet" href="/src/styles.css">
+  <script type="module" src="/src/app.js"></script>
+</head>
+<body>
+  <main class="app">
+    <header class="page-header"><h1>今天吃什么<span class="title-dot" aria-hidden="true">.</span></h1></header>
+    <section class="settings" aria-label="查找餐馆的设置">
+      <div class="location-row">
+        <div class="location-copy"><span class="eyebrow">位置</span><p id="location-label">尚未设置</p></div>
+        <button class="text-button" id="edit-location" type="button">修改</button>
+      </div>
+      <p id="location-note" class="hint" hidden></p>
+      <button id="retry-location" class="text-button compact" type="button" hidden>重新定位</button>
+      <fieldset class="radius-field"><legend>搜索范围</legend>
+        <div class="radius-options">
+          <label><input type="radio" name="radius" value="500"><span>500m</span></label>
+          <label><input type="radio" name="radius" value="1000" checked><span>1km</span></label>
+          <label><input type="radio" name="radius" value="3000"><span>3km</span></label>
+          <label><input type="radio" name="radius" value="5000"><span>5km</span></label>
+        </div>
+      </fieldset>
+      <p class="hint radius-hint">距离仅用于查找附近餐馆</p>
+    </section>
+    <section class="decision" aria-label="随机餐食">
+      <div class="food-space">
+        <p id="special-label" class="special-label" hidden>今天吃点特别的</p>
+        <h2 id="food-name">今天吃什么？</h2>
+      </div>
+      <button id="primary" class="primary-button" type="button">随机一下</button>
+      <button id="again" class="text-button again" type="button" hidden>再来一次</button>
+      <p id="draw-announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+    </section>
+    <section id="nearby" class="nearby" aria-labelledby="nearby-title" hidden>
+      <div class="section-heading"><h2 id="nearby-title">相关门店</h2><span id="result-count" class="hint"></span></div>
+      <p id="search-context" class="hint"></p>
+      <div id="search-status" class="status-box" role="status" aria-live="polite"></div>
+      <div id="search-actions" class="inline-actions"></div>
+      <ol id="restaurants" class="restaurants"></ol>
+      <p class="hint attribution">数据来自高德；具体菜品及营业情况以门店为准。</p>
+      <p id="navigation-note" class="hint" hidden>在高德中确认起点和出行方式。若未能打开 App，可使用门店下方的网页入口。</p>
+    </section>
+  </main>
+  <dialog id="location-dialog" aria-labelledby="location-title" aria-describedby="location-privacy">
+    <div class="dialog-heading"><h2 id="location-title">设置搜索中心</h2><button id="close-location" class="icon-button" aria-label="关闭位置选择" type="button">×</button></div>
+    <p id="location-privacy" class="hint">定位、地点搜索与查店会将所需信息发送给高德。仅在本机保存搜索范围和上次位置。</p>
+    <button id="locate" class="secondary-button full-width" type="button">使用当前位置</button>
+    <p id="locate-status" class="hint" role="status"></p>
+    <div id="confirm-center" class="confirm-center" hidden><p id="confirm-description"></p><button id="accept-center" class="secondary-button" type="button">确认以此为搜索中心</button></div>
+    <label class="search-label" for="place-query">或搜索地点</label>
+    <input id="place-query" type="search" placeholder="输入城市、商场、学校或街道" maxlength="80" autocomplete="off" enterkeyhint="search" aria-describedby="place-help">
+    <p id="place-help" class="hint">请选择下方具体地点；输入文字不会更改位置。</p>
+    <p id="place-status" class="hint" role="status"></p>
+    <ul id="place-results" class="place-results"></ul>
+  </dialog>
+  <noscript><p>请启用 JavaScript 以随机餐食。</p></noscript>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "what-to-eat-today",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env server/index.js",
+    "build": "node scripts/build.mjs",
+    "check:build": "node --env-file-if-exists=.env scripts/check-build.mjs",
+    "start": "node --env-file-if-exists=.env server/index.js --production",
+    "preview": "node --env-file-if-exists=.env scripts/preview.mjs",
+    "test": "node --test tests/unit/*.test.js tests/server/*.test.js",
+    "test:e2e": "playwright test",
+    "test:all": "npm test && npm run build && npm run check:build && npm run test:e2e"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0"
+  }
+}
