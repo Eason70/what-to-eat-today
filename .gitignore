@@ -12,3 +12,7 @@ playwright-report/
 # 独立简化版及临时托管产物不属于完整版源码仓库。
 public-site/
 exports/
+.wrangler/
+.dev.vars
+.dev.vars.*
+worker-configuration.d.ts

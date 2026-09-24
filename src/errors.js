@@ -5,6 +5,7 @@ export function friendlyError(error) {
   const messages = {
     OFFLINE: '当前离线，查找餐馆和地点需要联网。仍可随机餐食。',
     NOT_CONFIGURED: '查店服务尚未配置，暂时无法查找真实门店。仍可随机餐食。',
+    AMAP_DISABLED: '地图查店暂未开放，仍可随机选择餐食。',
     JS_NOT_CONFIGURED: '自动定位尚未配置，可尝试搜索地点设置中心。',
     KEY_INVALID: '地图服务凭据或域名配置有误，请联系站点维护者。',
     FORBIDDEN: '地图服务权限不足，请联系站点维护者检查配置。',

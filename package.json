@@ -14,9 +14,14 @@
     "preview": "node --env-file-if-exists=.env scripts/preview.mjs",
     "test": "node --test tests/unit/*.test.js tests/server/*.test.js",
     "test:e2e": "playwright test",
-    "test:all": "npm test && npm run build && npm run check:build && npm run test:e2e"
+    "test:all": "npm test && npm run build && npm run check:build && npm run test:e2e",
+    "dev:cloudflare": "npm run build && wrangler dev",
+    "deploy:cloudflare": "npm run build && npm run check:build && wrangler deploy",
+    "types:cloudflare": "wrangler types"
   },
   "devDependencies": {
-    "@playwright/test": "^1.63.0"
+    "@cloudflare/workers-types": "5.20260924.1",
+    "@playwright/test": "^1.63.0",
+    "wrangler": "4.137.0"
   }
 }

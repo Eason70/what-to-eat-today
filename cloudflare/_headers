@@ -1,0 +1,10 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: geolocation=(self), camera=(), microphone=()
+  Cache-Control: no-cache
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-eval' https://webapi.amap.com https://jsapi-service.amap.com; connect-src 'self' https://*.amap.com; img-src 'self' data: https://*.amap.com; style-src 'self' 'unsafe-inline'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
+
+/sw.js
+  Service-Worker-Allowed: /

@@ -49,6 +49,7 @@ export async function loadAmap() {
   if (sdkPromise) return sdkPromise;
   sdkPromise = (async () => {
     const config = await requestJSON('/api/config');
+    if (config.amapEnabled === false) throw new ServiceError('AMAP_DISABLED');
     if (!config.jsConfigured || !config.jsKey) throw new ServiceError('JS_NOT_CONFIGURED');
     globalThis._AMapSecurityConfig = { serviceHost: `${location.origin}/_AMapService` };
     return new Promise((resolve, reject) => {

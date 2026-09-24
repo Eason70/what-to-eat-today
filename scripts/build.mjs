@@ -24,4 +24,5 @@ const urls = ['/', ...files.filter(([, dest]) => dest !== 'index.html').map(([, 
 const sw = template.replace('__CACHE_NAME__', `what-to-eat-${version}`).replace('__ASSET_URLS__', JSON.stringify(urls));
 await writeFile(path.join(out, 'sw.js'), sw);
 await writeFile(path.join(out, 'build-info.json'), JSON.stringify({ version, files: urls }, null, 2));
+for (const name of ['_headers', '.assetsignore']) await copyFile(path.join(root, 'cloudflare', name), path.join(out, name));
 console.log(`生产构建完成：${files.length} 个静态文件；缓存版本 ${version}`);

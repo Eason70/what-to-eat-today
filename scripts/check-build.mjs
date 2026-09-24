@@ -6,7 +6,7 @@ const root = fileURLToPath(new URL('../dist/', import.meta.url));
 const info = JSON.parse(await readFile(path.join(root, 'build-info.json'), 'utf8'));
 const manifest = JSON.parse(await readFile(path.join(root, 'manifest.webmanifest'), 'utf8'));
 assert.equal(manifest.start_url, '/');
-const allowed = new Set(['index.html', 'sw.js', 'build-info.json', ...info.files.filter(p => p !== '/').map(p => p.slice(1))]);
+const allowed = new Set(['index.html', 'sw.js', 'build-info.json', '_headers', '.assetsignore', ...info.files.filter(p => p !== '/').map(p => p.slice(1))]);
 async function verify(dir, prefix = '') {
   for (const entry of await readdir(dir, { withFileTypes: true })) {
     const relative = prefix + entry.name;

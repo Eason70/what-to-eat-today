@@ -1,0 +1,13 @@
+# Cloudflare 迁移验证
+
+日期：2026-09-24。
+
+- `npm test`：53 项通过，含 8 项 Worker 测试；覆盖关闭开关、凭据隔离、跨站阻断、参数限制、限流失败关闭、上游响应裁剪、兼容接口及错误脱敏。上游使用模拟响应，没有调用真实高德。
+- `npm run build` 和 `npm run check:build`：通过，检查静态白名单、图标、缓存和真实服务端凭据排除。
+- `npm run test:e2e`：23 项通过，含 320–1280px 布局、异步竞态、位置失败、门店排序展示和离线缓存。
+- `wrangler deploy --dry-run`、`wrangler types`：通过。
+- Wrangler 本地 workerd：配置接口正常，关闭状态返回 `AMAP_DISABLED`，CSP 生效，`.env`、服务器源文件和构建信息不可读取；390px 页面无脚本错误、横向溢出或外部请求，随机抽取及离线重开通过。页面截图已查看。
+- 发布成功：`what-to-eat-today`，版本 `11ba9a4f-2dfa-42fd-a6ce-3b798cb70107`。上传 16 个静态资源，绑定为静态资源、限流器及 `AMAP_ENABLED=false`，无高德 Secret。
+- 地址：https://what-to-eat-today.liu1214550793.workers.dev/。
+
+限制：正式域名的手机打开与抽取待用户确认；开发电脑访问 workers.dev 存在 TLS 握手问题。此前用户仅确认同账号下最小测试页可打开。云端真实高德联调、账户费用核实、正式域名白名单与手机定位/导航均未完成。尚未启用真实高德请求，当前不能称为完整查店功能已公开可用。
