@@ -6,7 +6,7 @@
 
 ## 部署状态
 
-**当前入口：[今天吃什么（Pages）](https://today-food-direct-check.pages.dev/)。** 用户已在关闭代理、关闭 Wi-Fi、使用手机流量的测试要求下确认这个域名的页面与实时后台检查成功；现已将完整应用迁到同一地址，完整定位和查店的手机直连验收仍待反馈。
+**当前入口：[今天吃什么（Pages）](https://today-food-direct-check.pages.dev/)。** 完整应用已迁移到此地址。用户按关闭代理、使用手机流量、刷新页面并测试定位和“附近哪有”的要求验证后，回复“都没问题了”，完成本次手机环境下的完整应用直连验收；不代表所有网络或未来可用性保证。
 
 Pages 提供页面和同源 API 入口，通过内部 Service binding 调用现有 Cloudflare Worker。手机不再请求旧 `workers.dev` 域名；用户明确反馈该旧域名需要代理才能打开。迁移说明见 [Pages 部署说明](cloudflare/pages/README.md)。
 
