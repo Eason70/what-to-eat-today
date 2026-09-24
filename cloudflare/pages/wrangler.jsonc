@@ -1,0 +1,7 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "today-food-direct-check",
+  "pages_build_output_dir": "../../dist-pages",
+  "compatibility_date": "2026-09-24",
+  "services": [{ "binding": "FOOD_API", "service": "what-to-eat-today" }]
+}

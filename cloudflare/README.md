@@ -1,5 +1,7 @@
 # Cloudflare 部署
 
+当前面向手机的入口已迁至 [Pages](https://today-food-direct-check.pages.dev/)，通过内部绑定复用本文的 Worker 后台；发布 Pages 页面请看 [Pages 部署说明](pages/README.md)。旧 `workers.dev` 地址在用户手机网络下需要代理，本文的 Worker 仍承担后台接口。
+
 同一个 Worker 提供完整前端和同源接口，使用 Cloudflare 的 workers.dev 地址。无需购买服务器或域名；部署到现有 Free 计划，不主动升级套餐。平台免费配额和高德计费相互独立。
 
 ## 发布

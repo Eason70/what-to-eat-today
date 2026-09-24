@@ -17,7 +17,8 @@
     "test:all": "npm test && npm run build && npm run check:build && npm run test:e2e",
     "dev:cloudflare": "npm run build && wrangler dev",
     "deploy:cloudflare": "npm run build && npm run check:build && wrangler deploy",
-    "types:cloudflare": "wrangler types"
+    "types:cloudflare": "wrangler types",
+    "build:pages": "npm run build && npm run check:build && node scripts/build-pages.mjs"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "5.20260924.1",
